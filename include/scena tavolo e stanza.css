@@ -1,0 +1,200 @@
+   
+      
+      
+/*------------------------------------------*/
+/* TAVOLO */
+
+/*obj tavolo*/
+/*il top del tavolo*/
+.obj_tavolo_piano{
+  margin:0px;padding:0px; 							
+  transform-style: preserve-3d;
+  transform: translateX(0px) translateY(0px) translateZ(0px); 
+  user-select: none;	
+} 
+
+.obj_tavolo_piano_pivot{
+  transform-style: preserve-3d; 
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+
+
+
+
+.tavolo_piano_avanti {
+position: absolute; left: 0px; top:0px; width: 10000px ; height: 400px; 
+background-color: #D28900; 
+opacity: 1.0;
+transform: rotateX(0deg) translateX(0px) translateY(0px) translateZ(400px) ;
+border:2px solid black;
+    border-top:0px solid black;
+}
+.tavolo_piano_dietro {
+position: absolute; left: 0px; top:0px; width: 10000px ; height: 400px; 
+background-color: #D28900; 
+opacity: 1.0;
+transform: rotateX(0deg) translateX(0px) translateY(0px) translateZ(-4400px) ; 
+}
+.tavolo_piano_sinistra {
+position: absolute; left: 0px; top:0px; width: 4800px ; height: 400px; 
+background-color: #D28900; 
+opacity: 1.0;
+transform: rotateX(0deg) rotateY(90deg) translateX(2000px) translateY(0px) translateZ(-2400px) ; 
+}
+.tavolo_piano_destra {
+position: absolute; left: 0px; top:0px; width: 4800px ; height: 400px; 
+background-color: #D28900; 
+opacity: 1.0;
+transform: rotateX(0deg) rotateY(90deg) translateX(2000px) translateY(0px) translateZ(7600px)
+}
+.tavolo_piano_sopra {
+//mattonelle
+}
+.tavolo_piano_sotto {
+position: absolute; left: 0px; top:0px; width: 10000px ; height: 4800px; 
+background-color: #533600; 
+opacity: 1.0;
+transform: rotateX(90deg) rotateY(0deg) translateX(0px) translateY(-2000px) translateZ(2000px) ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*obj tavolo*/
+/*la base del tavolo*/
+.obj_tavolo_base{
+  margin:0px;padding:0px; 							
+  transform-style: preserve-3d;
+  transform: translateX(0px) translateY(400px) translateZ(0px); 
+  user-select: none;	
+} 
+
+.obj_tavolo_base_pivot{
+  transform-style: preserve-3d; 
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+
+
+
+
+.tavolo_base_avanti {
+position: absolute; left: 0px; top:0px; width: 5000px ; height: 5000px; 
+background-color: #fff; 
+opacity: 0.5;
+transform: rotateX(0deg) translateX(2400px) translateY(0px) translateZ(-1200px) ;
+border:2px solid white; 
+}
+.tavolo_base_dietro {
+position: absolute; left: 0px; top:0px; width: 5000px ; height: 5000px; 
+background-color: #777; 
+opacity: 0.5;
+border:2px solid white;
+transform: rotateX(0deg) translateX(2400px) translateY(0px) translateZ(-2800px) ; 
+}
+.tavolo_base_sinistra {
+position: absolute; left: 0px; top:0px; width: 1600px ; height: 5000px; 
+background-color: #fff; 
+opacity: 0.5;
+border:2px solid white;
+transform: rotateX(0deg) rotateY(90deg) translateX(2000px) translateY(0px) translateZ(1600px) ; 
+}
+.tavolo_base_destra {
+position: absolute; left: 0px; top:0px; width: 1600px ; height: 5000px; 
+background-color: #fff; 
+opacity: 0.5;
+border:2px solid white;
+transform: rotateX(0deg) rotateY(90deg) translateX(2000px) translateY(0px) translateZ(6600px)
+}
+.tavolo_base_sopra {
+//unito
+}
+.tavolo_base_sotto {
+position: absolute; left: 0px; top:0px; width: 5000px ; height: 1600px; 
+background-color: #fff; 
+opacity: 0.5;
+border:2px solid white;
+transform: rotateX(90deg) rotateY(0deg) translateX(2400px) translateY(-2000px) translateZ(-4200px) ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*stanza*/
+
+.obj_stanza{
+  margin:0px;padding:0px; 							
+  transform-style: preserve-3d;
+  transform: translateX(0px) translateY(0px) translateZ(0px); 
+  user-select: none;	
+} 
+
+.obj_stanza_pivot{
+  transform-style: preserve-3d; 
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+
+
+
+
+.obj_stanza_pavimento {
+position: absolute; left: 0px; top:0px; width: 20000px ; height: 20000px; 
+background-color: fuchsia;
+background-image: url('scena/240728_175931 pavimento 3.png');
+background-repeat: no-repeat; 
+background-position: center;
+background-size: cover; 
+opacity: 1.0;
+transform: rotateX(90deg) translateX(-5000px) translateY(0px) translateZ(4400px) ;
+}
+.obj_stanza_parete_dietro {
+position: absolute; left: 0px; top:0px; width: 20000px ; height: 15600px; 
+background-color: #D28900; 
+background-image: url('scena/240728_174012_muro_1_blu_radial.png');
+background-repeat: no-repeat; 
+background-position: center;
+background-size: cover; 
+opacity: 1.0;
+transform: rotateX(0deg) translateX(-5000px) translateY(-10000px) translateZ(-10000px) ; 
+}
+      

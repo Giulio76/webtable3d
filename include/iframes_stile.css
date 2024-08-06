@@ -1,0 +1,45 @@
+html, body {
+
+    font-size: 1em;
+    font-family: verdana; 
+    background: #123456; 
+    color: white;
+    margin:0px;padding:0px;     
+
+}
+
+
+.nome_alto {
+    margin: 0.2em;
+}
+
+.ctn_immagine {
+    text-align:center; margin-left: 1em; margin-right: 1em;
+}
+
+.immagine {
+    max-width: 96%; height: auto; max-height:30vh; border:5px inset silver;
+}
+
+.ctn_attributo_1 {
+    margin-left: 1em;
+}
+
+.ctn_testo {
+    height: 30vh; overflow:auto; margin-left: 1.5em; margin-right: 1.5em;
+    
+    margin-top: 0.5em; 
+}
+
+
+.ctn_nomefile {
+    position: fixed; left: 3%; bottom: 1%; width: 92% ; height: 1em ; 
+	text-align:center; padding: 0.2em; font-size: 0.6em; 
+	color: silver; font-style: italic;
+}
+
+
+
+.elm_btn_copia_in_clipboard {
+    position: fixed; right: 1%; bottom: 1%; z-index:20; font-size: 2em; border:0px solid black; background: #234567; border-radius: 8px;  
+}

@@ -1,0 +1,135 @@
+
+
+/*-----------------------*/
+/*  OBJ CARTA */
+.obj_carta{
+  position: absolute;
+  width:400px; height:560px; margin:0px;padding:0px; 							
+  transform-style: preserve-3d;
+  transform: translateX(0px) translateY(-560px) translateZ(0px); 
+  user-select: none;	
+} 
+
+.obj_carta_pivot{
+  transform-style: preserve-3d; 
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+
+
+
+
+
+
+
+
+/*faccia 1 contenuto*/
+
+.obj_carta_faccia_1_front_stile_1_default{    
+  transform: translateZ(1px);
+  justify-content: center;
+  width:340px; height:500px; margin:30px;padding:0px; 
+  position: absolute;
+  backface-visibility: inherit;
+  background: white; color: black; border:2px solid blue; 
+}
+
+.obj_carta_faccia_1_front_stile_2_dark{    
+  transform: translateZ(1px);
+  justify-content: center;
+  width:340px; height:500px; margin:30px;padding:0px; 
+  position: absolute;
+  backface-visibility: inherit;
+  background: silver; color: black; border:2px solid silver; 
+}
+
+
+
+
+
+
+
+
+
+
+
+/*foglio centrale della carta col bordo */
+
+.obj_carta_faccia_2_centro_stile_1_default{
+  transform: translateZ(0px);
+  justify-content: center;
+  width:400px; height:560px; margin:0px;padding:0px; 
+  position: absolute;
+  border-radius: 36px; border: 2px solid silver; 
+  color: silver; background-color: #333;  
+}      
+
+.obj_carta_faccia_2_centro_stile_2_dark{
+  transform: translateZ(0px);
+  justify-content: center;
+  width:400px; height:560px; margin:0px;padding:0px; 
+  position: absolute;
+  border-radius: 36px; border: 2px solid silver; 
+  color: silver; background-color: #333;  
+}     
+
+.obj_carta_faccia_2_centro_stile_3_rosso_a{
+  transform: translateZ(0px);
+  justify-content: center;
+  width:400px; height:560px; margin:0px;padding:0px; 
+  position: absolute;
+  border-radius: 36px; border: 2px solid silver; color: silver; 
+  background-image: linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,1)); 
+}     
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*DORSO DELLE CARTE FRANCESI*/
+        
+.obj_carta_faccia_3_dorso_stile_1_default{
+  transform: rotateY(180deg) translateZ(1px);  
+  width:340px; height:500px; margin:30px;padding:0px; 
+  position: absolute;
+  backface-visibility: inherit;
+  border-radius: 5px;
+  
+  background-color: navy; 
+  background-image: url('carte/240728_191657 dorso carta pattern 1 motivo 1 size 04.png');
+  background-repeat: no-repeat; 
+  background-position: center;
+  backgr ound-size: cover; 
+  opacity: 1.0;  
+}        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+

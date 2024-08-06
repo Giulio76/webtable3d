@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://www.w3schools.com/cssref/trycss3_perspective-origin_inuse.htm -->
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>webtable3d - by Giulio76 @ 2024</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" href="include/w3.css">
+<link rel="stylesheet" href="include/w3-colors-2021.css">
+<link rel="stylesheet" href="include/w3-colors-2020.css">
+
+
+<link rel="stylesheet" href="include/scena tavolo e stanza.css">
+<link rel="stylesheet" href="include/carte stile.css">
+
+
+<script src="archivio.js"></script>
+
+<script src="include/w3.js"></script> 
+
+<script src="include/jquery-3.7.1.min.js"></script>
+
+<script>
+"use strict"; //The "use strict" Directive //The purpose of "use strict" is to indicate that the code should be executed in "strict mode". With strict mode, you can not, for example, use undeclared variables.
+
+
+
+function fn_reset()
+{
+	document.getElementById('div1').style.perspective= "1000" + "px";	
+	document.getElementById('persp').value= "1000";
+	document.getElementById('persp_label').innerHTML= "1000";
+	
+	document.getElementById('div1').style.perspectiveOrigin= '50' + '% ' + '50' + '%';	
+	document.getElementById('operspx').value= "50";
+	document.getElementById('operspy').value= "50";
+	document.getElementById('opersp_label').innerHTML= '50' + '% ' + '50' + '%';	
+	
+	
+	
+	/*
+	document.getElementById('div2').style.width  = "10000" + 'px';
+	document.getElementById('div2').style.height = "5000" + 'px';
+	document.getElementById('slider_size_w').value= "10000";
+	document.getElementById('slider_size_h').value= "5000";	
+	document.getElementById('slider_size_label').innerHTML= '10000' + 'px ' + '5000' + 'px';	
+	
+	document.getElementById('div2').style.transform = "rotateX(" + "90" + "deg)" ;		
+	document.getElementById('slider_rotation_x').value= "90";	
+	document.getElementById('slider_rotation_x_label').innerHTML= '90 deg' ;	
+	
+	
+	
+	document.getElementById('div2').style.left = "0px" ;
+	document.getElementById('div2').style.top  = "0px" ;
+	document.getElementById('slider_position_x').value= "0";	
+	document.getElementById('slider_position_y').value= "0";	
+	document.getElementById('slider_position_label').innerHTML = "0" + "px " + "0" + "px";  
+	
+	*/
+	
+	document.getElementById('div1').style.transform = "scale(" + "1" + "," + "1" + ")" ;	
+	document.getElementById('slider_scale_x').value= "100";	
+	document.getElementById('slider_scale_y').value= "100";	
+	document.getElementById('slider_scale_label').innerHTML = "100" + " 100" ;  
+	
+
+/*	
+	document.getElementById('div3').style.width  = "1000" + 'px';
+	document.getElementById('div3').style.height = "1000" + 'px';
+	document.getElementById('div3').style.left = "400px" ;
+	document.getElementById('div3').style.top  = "-120px" ;
+	*/
+	
+	
+	//rotazione pov iniziale
+	
+	//document.getElementById('pov').style.transform = "rotateX(" + "-22" + "deg)" ;	
+	
+	//document.getElementById('pov').style.transform = "rotateX(" + "-90" + "deg)" ;	
+	
+
+
+	//calcola l'altezza della carta
+	//id=display_2 contenitore_carta
+	//let strA = document.getElementById('contenitore_carta');
+	//let strB = strA.getBoundingClientRect().height;	//249.38333129882812
+	//document.getElementById('display_2').innerHTML = strB; 
+	
+	//let strH = strB.toFixed(); //249
+	
+	
+	//siccome il piano
+	//prendi altezza del piano doce è 'appoggiata la carta'
+	//usa come riferimento per calcolare la posizione y della carta
+	//y del piano - altezza della carta
+	
+	//let strC = document.getElementById('div2');
+	//let strD = strC.style.top; //-140px  con unità di misura - togli
+	//let strE = parseInt(strD);
+	
+	/*
+	//non gli piace let strE += strH; tipi diversi stringa numero
+	let strE_N = strE.valueOf();
+	let strH_N = strH.valueOf();
+	let strG = strE_N + strH_N; //-140249 !!!!!!!!!!!!!!!!!!!!!!!!
+	///non sono stringhe stronzo
+	*/
+	
+	//let strF = Number(strE) + Number(strH); //109 eeeeeeeeeeeeeeeeee
+
+	//ok alert( strF);
+
+	//strA.style.top = strF + "px";
+	
+	//ok alert( strF);
+
+	//no boh strA.style.top = "109" + "px"; //non lo fa	
+	//no document.getElementById('contenitore_carta').style.top = strF + "px";
+	
+	//document.getElementById('contenitore_carta').style.top = "109px";
+
+//alert( document.getElementById('contenitore_carta').style.top);
+
+//ok document.getElementById('contenitore_carta').style.top = "109px";
+//ok strA.style.top = strF + "px";
+//strA.style.top = strF + "px";
+
+//alert( document.getElementById('contenitore_carta').style.top);
+
+//lo fa ma è troppo poco percio non vedevo la differenza
+
+
+	//reset iniziale con un pov che mi serve adesso ---------------------------------------------------------------
+	//document.getElementById('pov').style.transform = "translate3d(48px,145px,-952px) rotate3d( 1,0,0,-41deg)" ;
+	document.getElementById('pov').style.transform = "translate3d(-3226px,645px,-5484px) rotate3d( 1,0,0,-44deg)" ;
+	//-------------------------------------------------------------------------------------------------------------
+	
+	
+	
+	//@ 240722_082147
+	//sempre ne load, carica matrice
+	//fn_crea_oggetti_indicati_nella_matrice_oggetti();
+	//spostato nella funzione di import
+	
+	
+	//@240729_175736 inporta da script nella textarea
+	
+	
+	
+	document.getElementById('matrice_importa_csv').value = strCSV_Incoming;
+	
+	fn_matrice_leggi_csv(); //leggi al contenitore all'avvio
+	
+}
+
+
+function changePersp(value)
+{
+document.getElementById('div1').style.perspective=value + "px";
+document.getElementById('div1').style.webkitPerspective=value + "px";
+document.getElementById('persp_label').innerHTML=value;
+}
+
+
+function changeOrgPersp()
+{
+	var x=document.getElementById('operspx').value;
+	var y=document.getElementById('operspy').value;
+	document.getElementById('div1').style.perspectiveOrigin=x + '% ' + y + '%';	
+	document.getElementById('opersp_label').innerHTML=x + "% " + y + "%";      
+}
+</script>
+<script>
+function changeSize()
+{
+	let w=document.getElementById('slider_size_w').value;
+	let h=document.getElementById('slider_size_h').value;
+	document.getElementById('div2').style.width = w + 'px';
+	document.getElementById('div2').style.height = h + 'px';
+	document.getElementById('slider_size_label').innerHTML = w + "px " + h + "px";      
+}
+</script>
+<script>
+function changeRotationX()
+{
+	let rot_x =document.getElementById('slider_rotation_x').value;	
+	document.getElementById('div2').style.transform = "rotateX(" + rot_x + "deg)" ;	
+	document.getElementById('slider_rotation_x_label').innerHTML = rot_x + " deg";
+	
+	/*modifico la rotazione relativa anche di altri elementi*/
+	let rot_x_101 = rot_x - 90;
+	document.getElementById('tacchino').style.transform = "rotateX(" + rot_x_101 + "deg)" ;	
+	
+	
+	
+}
+</script>
+<script>
+function changeRotationY()
+{
+	let rot_y =document.getElementById('slider_rotation_y').value;	
+	document.getElementById('div2').style.transform = "rotateY(" + rot_y + "deg)" ;	
+	
+	document.getElementById('slider_rotation_y_label').innerHTML = rot_y + " deg";
+}
+</script>
+<script>
+function changePosition()
+{
+	let pos_x=document.getElementById('slider_position_x').value;
+	let pos_y=document.getElementById('slider_position_y').value;
+	document.getElementById('div2').style.left = pos_x + 'px';
+	document.getElementById('div2').style.top = pos_y + 'px';
+	document.getElementById('slider_position_label').innerHTML = pos_x + "px " + pos_y + "px";      
+	
+	document.getElementById('tacchino').style.left = pos_x + 'px';	
+	document.getElementById('tacchino').style.top = pos_y + 'px';
+	
+	
+	
+}
+</script>
+<script>
+function changeScale()
+{
+	let sca_x=document.getElementById('slider_scale_x').value;
+	let sca_y=document.getElementById('slider_scale_y').value;
+
+	let sca_x_fr = sca_x/100;
+	let sca_y_fr = sca_y/100;
+	
+	document.getElementById('div1').style.transform = "scale(" + sca_x_fr + "," + sca_y_fr + ")" ;
+	document.getElementById('slider_scale_label').innerHTML = sca_x_fr + " " +  sca_y_fr ;      
+}
+</script>
+<script>
+function changeTranslate3d_e_rotate3d()
+{
+
+	let tra_x=document.getElementById('slider_translate3d_x').value;
+	let tra_y=document.getElementById('slider_translate3d_y').value;
+	let tra_z=document.getElementById('slider_translate3d_z').value;
+
+
+	let rot_x=document.getElementById('slider_rotate3d_x').value;
+	let rot_y=document.getElementById('slider_rotate3d_y').value;
+	let rot_z=document.getElementById('slider_rotate3d_z').value;
+	let rot_a=document.getElementById('slider_rotate3d_a').value;
+
+
+
+	/*
+		esempi MDN translate
+		Multiple function values 
+		transform: translateX(10px) rotate(10deg) translateY(5px);
+		transform: perspective(500px) translate(10px, 0, 20px) rotateY(3deg);
+	*/
+	
+	let strA = "translate3d(" + tra_x + "px," + tra_y + "px," + tra_z + "px" + ")" + " " + "rotate3d(" + rot_x + "," + rot_y + "," + rot_z + "," + rot_a + "deg)" ;
+	
+	document.getElementById('pov').style.transform = strA ;
+	
+	document.getElementById('display_1').innerHTML = strA; 
+
+	//document.getElementById('pov').style.transform = "translate3d(" + tra_x + "px," + tra_y + "px," + tra_z + "px" + ")" + " " + "rotate3d(" + rot_x + "," + rot_y + "," + rot_z + "," + rot_a + "deg)" ;
+	
+	//document.getElementById('pov').style.transform = "rotate3d(" + rot_x + "," + rot_y + "," + rot_z + "," + rot_a + "deg)" ;
+	
+	
+	
+	
+	document.getElementById('slider_translate3d_label').innerHTML = tra_x + "px," + tra_y + "px," + tra_z + "px" ;
+	
+	document.getElementById('slider_rotate3d_label').innerHTML =  rot_x + "," + rot_y + "," + rot_z + "," + rot_a ;
+	
+
+}
+</script>
+
+
+
+
+
+
+
+
+<style>
+html, body {
+ margin:0px;padding:0px; 
+ overflow:hidden; 
+ background: #123456; 
+}
+
+#div1 {
+}
+
+#div2 {
+}
+
+
+.mattonella:hover {background: yellow; }
+
+
+
+
+ 
+</style>
+</head>
+<body onload="fn_reset();" onwheel="fn_3d_pov_zoom(event)" 	
+	onmousedown="fn_3d_pov_mouse_start()" 
+	onmousemove="fn_3d_pov_translate_rotate(event)" 
+	onmouseup="fn_3d_pov_mouse_stop()"
+	>
+<script>
+//set variables
+var glb_strId_elem_selezionato = "a"; //id selezionato, info che uso per modificare
+
+//const mtrOggetti =   [	["carta_20240719_230829", 400, 100, 0, 0,  0, 0, 0, "tacchino", true ,"20240719_230829",200,200,"black","orange"] , ["carta_20240719_230829", 400, 100, 100, 0,  0, 0, 0, "tacchino", true ,"20240719_230829",200,200,"black","blue"]  , ["carta_20240719_230829", 400, 100, 200, 0,  0, 0, 0, "tacchino", true ,"20240719_230829",200,200,"black","red"] ];
+
+//["carta_20240719_230829", 400, 100, 0, 0,  0, 0, 0, "tacchino", true ,"20240719_230829",200,200,"black","orange"] ];
+//ok const mtrOggetti =   [ ["a",0,0,0,0,0,0,0,"a",true,"a",0,0,"a","a"] , ["a",0,0,0,0,0,0,0,"a",true,"a",0,0,"a","a"] ]; //elemento zero
+//const mtrOggetti =   [ ["a",0,0,0,0,0,0,0,"a",true,"a",0,0,"a","a"] ]; //elemento zero
+
+//const mtrOggetti =   [ [1,1],[2,2] ]; //elemento zero
+
+	//come in asp creo una matrice per metterci dentro le cose
+	//const mtrOggetti = Array.from({ length: 101 }, () => Array(51).fill(0));
+	const mtrOggetti = Array.from({ length: 101 }, () => Array(51).fill(''));
+	
+	//ok alert( mtrOggetti );
+	//alert( mtrOggetti[100][50]);
+
+
+var glb_bln_3d_pov_mouse_move_enable = true;	
+//questa varibile globale la uso come enable per gestire l'evento onmousemove che senno si mouove sempre anche cono i modali
+
+</script>
+
+<script>
+
+function fn_3d_pov_mouse_start() 	{ gbl_blnA = true;	document.getElementById("demo").innerHTML = 'true' ; }
+function fn_3d_pov_mouse_stop() 	{ gbl_blnA = false; }
+
+
+		//mem
+		var gbl_mem_int_client_x = 0;
+		var gbl_mem_int_client_y = 0;
+
+function fn_3d_pov_translate_rotate(event) {
+	if (gbl_blnA === true) {	
+	
+		if (glb_bln_3d_pov_mouse_move_enable === true ) {
+			
+		
+			//leggi puntatore
+		
+			let x = event.clientX;
+			let y = event.clientY;
+			//let text = "X coords: " + x + ", Y coords: " + y;
+			//document.getElementById("demo").innerHTML = text;
+			
+			
+			//pan x
+			
+			//modifico lo slider
+			let elmAx = document.getElementById('slider_translate3d_x');
+			let intAx = elmAx.value;
+
+			
+			//se è un numero minore o maggiore del loop precedente
+			//leggo x e ho memoria del valore precedente
+			
+			if (gbl_mem_int_client_x < x ) {
+				//va a sinistra allora tolgo
+				//elmAx.value = Number(intAx) - Number.parseInt(x/5)  ;		
+				//elmAx.value = Number(intAx) - Number.parseInt(x/10)  ;
+				elmAx.value = Number(intAx) - Number.parseInt(x/25)  ;
+			}
+
+			if (gbl_mem_int_client_x > x ) {
+				//va a destra e allora aggiungo
+				//elmAx.value = Number(intAx) + Number.parseInt(x/5)  ;		
+				//elmAx.value = Number(intAx) + Number.parseInt(x/10)  ;		
+				elmAx.value = Number(intAx) + Number.parseInt(x/25)  ;		
+			}		
+
+
+
+			//pan y
+			
+			//modifico lo slider
+			let elmAy = document.getElementById('slider_translate3d_y');
+			let intAy = elmAy.value;
+
+			
+			//se è un numero minore o maggiore del loop precedente
+			//leggo x e ho memoria del valore precedente
+			
+			if (gbl_mem_int_client_y < y ) {
+				//va a sinistra allora tolgo
+				//elmAy.value = Number(intAy) - Number.parseInt(x/5)  ;
+				elmAy.value = Number(intAy) - Number.parseInt(x/25)  ;
+			}
+
+			if (gbl_mem_int_client_y > y ) {
+				//va a destra e allora aggiungo
+				//elmAy.value = Number(intAy) + Number.parseInt(x/5)  ;
+				elmAy.value = Number(intAy) + Number.parseInt(x/25)  ;
+			}	
+			
+
+			document.getElementById('display_10').innerHTML = intAx + ' ' + x + ' ' + Number.parseInt(x/5) + '<br>' + intAy + '  ' +  y + ' ' + Number.parseInt(y/5) ;
+
+
+			//chiedo di avviare la funzione
+			changeTranslate3d_e_rotate3d();
+		
+
+			//mem
+			gbl_mem_int_client_x = x;
+			gbl_mem_int_client_y = y;
+			
+			
+		}//se non è visibile il modale
+	}
+}
+
+</script>
+
+
+<script>
+function fn_3d_pov_zoom(event) {
+  let y = event.deltaY;
+  
+  
+    let x = event.deltaMode;
+  // 0 = pixels
+  // 1 = lines
+  // 2 = pages
+  
+  
+  
+  //modifico lo slider
+  let elmA = document.getElementById('slider_translate3d_z');
+  let intA = elmA.value;
+  
+  if (y >0) {
+	elmA.value = Number(intA) - 200;
+  }
+
+  if (y <0) {
+	elmA.value = Number(intA) + 200;
+  }  
+  
+  document.getElementById("demo").innerHTML = y + ' ' + x + ' ' + elmA.value;
+  
+  //chiedo di avviare la funzione
+  changeTranslate3d_e_rotate3d();
+  
+}
+</script>
+
+
+
+
+
+<!--  sidebar destra  - modale interfacci editor dell'oggetto negli attributi standard -->
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" 
+	style="position: fixed; right: 0px; top: 0px; width: 300px; z-index:41; display:none;" id="rightMenu">
+	<button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>	
+
+	<div id="elm_sidebar_right_01" class="w3-bar-item" style="margin:0px;padding:0px; ">a</div> 
+  
+	<!--  rotate 3D -->
+	<h3>rotate 3D</h3>
+
+	<input class="w3-radio" type="radio" name="gender" value="x" 			
+			id="obj_manipulation_radio_rotate_3d_x" onClick="fn_obj_manipulation_rotate();" >
+	<label>asse X: <b><span id="obj_manipulation_radio_rotate_3d_x_label">0</span></b> deg</label>
+	<br>
+	<input type="range" min="-90" max="90" value="0" step="10"  id="obj_manipulation_selected_obj_slide1" style=" width: 100% ;"
+			onmousemove="fn_obj_manipulation_rotate(); document.getElementById('obj_manipulation_radio_rotate_3d_x_label').innerHTML = this.value ;">
+	
+	<input class="w3-radio" type="radio" name="gender" value="y" checked	
+			id="obj_manipulation_radio_rotate_3d_y" onClick="fn_obj_manipulation_rotate();" >
+	<label>asse Y <b><span id="obj_manipulation_radio_rotate_3d_y_label">0</span></b> deg</label>
+	<br>
+	<input type="range" min="-180" max="180" value="0" step="5" id="obj_manipulation_selected_obj_slide2" style=" width: 100% ;"
+			onmousemove="fn_obj_manipulation_rotate(); document.getElementById('obj_manipulation_radio_rotate_3d_y_label').innerHTML = this.value ;">
+	
+	<input class="w3-radio" type="radio" name="gender" value="z"			
+			id="obj_manipulation_radio_rotate_3d_z" onClick="fn_obj_manipulation_rotate();" >
+	<label>asse Z: <b><span id="obj_manipulation_radio_rotate_3d_z_label">0</span></b> deg</label></td>
+	<br>
+	<input type="range" min="-90" max="90" value="0" step="10" id="obj_manipulation_selected_obj_slide3" style=" width: 100% ;"
+			onmousemove="fn_obj_manipulation_rotate(); document.getElementById('obj_manipulation_radio_rotate_3d_z_label').innerHTML = this.value ;">
+
+
+	<hr>
+	<!--  colori -->
+	<h3>color</h3>
+	
+	text color  <input type="color" id="obj_manipulation_selected_obj_color_text" onchange="fn_obj_manipulation_color()"><br><br>
+	background  <input type="color" id="obj_manipulation_selected_obj_color_background" onchange="fn_obj_manipulation_color()"><br>
+
+
+
+<script>
+function fn_obj_manipulation_rotate () {
+
+	let strRot_x_slider =document.getElementById('obj_manipulation_selected_obj_slide1').value;
+	let strRot_y_slider =document.getElementById('obj_manipulation_selected_obj_slide2').value;
+	let strRot_z_slider =document.getElementById('obj_manipulation_selected_obj_slide3').value;
+	
+	let strRadio_rotate_3d_x = document.getElementById('obj_manipulation_radio_rotate_3d_x').checked;
+	let strRadio_rotate_3d_y = document.getElementById('obj_manipulation_radio_rotate_3d_y').checked;
+	let strRadio_rotate_3d_z = document.getElementById('obj_manipulation_radio_rotate_3d_z').checked;
+
+	//alert(strRadio_rotate_3d_x +' '+ strRadio_rotate_3d_y +' '+strRadio_rotate_3d_z);
+
+
+
+	//Cercare qual è l'array dell'oggetto selezionato - glb_strId_elem_selezionato
+	let r = fn_servizo_torna_id_obj_sel();
+	//----------------------------------------------------------------------------
+	//se esiste
+	if (r >= 0) {
+
+		if (strRadio_rotate_3d_x == true) { //ok alert( 'cx');
+			//rotazione su x
+			mtrOggetti[r][4] = 1;		//asse
+			mtrOggetti[r][5] = 0;
+			mtrOggetti[r][6] = 0;
+			mtrOggetti[r][7] = strRot_x_slider;	//rotazione	
+		}
+		
+		if (strRadio_rotate_3d_y == true) { //ok alert( 'y');
+			//rotazione su y
+			mtrOggetti[r][4] = 0;		//asse
+			mtrOggetti[r][5] = 1;
+			mtrOggetti[r][6] = 0;
+			mtrOggetti[r][7] = strRot_y_slider;	//rotazione	
+		}
+
+		if (strRadio_rotate_3d_z == true) {
+			//rotazione su z
+			mtrOggetti[r][4] = 0;		//asse
+			mtrOggetti[r][5] = 0;
+			mtrOggetti[r][6] = 1;
+			mtrOggetti[r][7] = strRot_z_slider;	//rotazione	
+		}
+
+
+		//poi leggo tutto e faccio lo spostamento // vedi che è 0 based
+		tra_x = mtrOggetti[r][1];	//translate x
+		tra_y = mtrOggetti[r][2];	//translate y
+		tra_z = mtrOggetti[r][3];	//translate z
+		rot_x = mtrOggetti[r][4];
+		rot_y = mtrOggetti[r][5];
+		rot_z = mtrOggetti[r][6];
+		rot_a = mtrOggetti[r][7];	//alfa
+
+
+		document.getElementById(glb_strId_elem_selezionato).style.transform = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)'+  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+		
+		document.getElementById('display_4').innerHTML = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)'+  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+		
+		//translate3d(550px,100px,200px) rotate3d(0,0,0,0deg)
+	}
+
+}
+</script>
+ <!--  ------------------------------------------------------------------------------------------------- -->
+
+<script>
+function fn_obj_manipulation_color () {
+
+	let strColor_ctrl_value 		= document.getElementById('obj_manipulation_selected_obj_color_text').value;
+	let strBackground_ctrl_value 	= document.getElementById('obj_manipulation_selected_obj_color_background').value;
+	//ok onchange alert( strColor_ctrl_value); //#c7a7cd
+	
+	//scrivo il valore nell'oggetto in scena e nel database matrice
+	
+	//Cercare qual è l'array dell'oggetto selezionato - glb_strId_elem_selezionato
+	let r = fn_servizo_torna_id_obj_sel();
+	//----------------------------------------------------------------------------
+	//se esiste
+	if (r >= 0) {
+		mtrOggetti[r][13] = strColor_ctrl_value ;
+		mtrOggetti[r][14] = strBackground_ctrl_value ;
+
+		document.getElementById(glb_strId_elem_selezionato).style.color = strColor_ctrl_value ;
+		document.getElementById(glb_strId_elem_selezionato).style.backgroundColor = strBackground_ctrl_value ;
+
+	}
+	
+}
+</script>
+
+</div>
+
+
+
+
+
+<!--  menu top -->
+<div class="w3-bar w3-light-grey" style="position: fixed; left: 0px; top: 0px; width: 100%; z-index:40; ">
+<a href="#" class="w3-bar-item w3-button">Home</a>
+<a href="#" class="w3-bar-item w3-button" onclick="fn_ctn_pannello_controlli_toggle()">p.controlli</a>
+
+<a href="#" class="w3-bar-item w3-button " style=" margin-left: 15em; " onClick="info();" >info</a>
+
+<a href="#" class="w3-bar-item w3-button" onClick="fn_menu_manipola_show()" >manipola</a>
+
+<a href="#" class="w3-bar-item w3-button" onClick="fn_menu_ctn_modale_obj_001_carta_show()" >modale obj carta</a>
+
+<a href="#" class="w3-bar-item w3-button" onClick="fn_menu_ctn_modale_obj_901_tutti_show()" >modale obj tutti</a>
+
+<a href="#" class="w3-bar-item w3-button " style=" margin-left: 5em; color: red; " onClick="fn_sistema_space_clear();" >clear space</a>
+
+<a href="#" class="w3-bar-item w3-button " style=" margin-left: 5em; color: red; " onClick="fn_matrice_leggi_csv();" >leggi csv</a>
+
+<a href="#" class="w3-bar-item w3-button " style=" margin-left: 5em; color: red; " onClick="fn_matrice_esporta_csv();" >esporta csv</a>
+
+
+<div class="w3-dropdown-hover w3-right" >
+  <button class="w3-button">&vellip; context</button>
+  <div class="w3-dropdown-content w3-bar-block w3-card-4">
+	<span  class="w3-bar-item w3-small">card_<br>20240719<br>_203258</span>
+	<a href="#" class="w3-bar-item w3-button" onClick="fn_menu_manipola_show()" >manipola</a>
+	<a href="#" class="w3-bar-item w3-button" onClick="modifica();" >modifica</a>
+	<a href="#" class="w3-bar-item w3-button" onClick="elimina();" >elimina</a>
+	<a href="#" class="w3-bar-item w3-button">info</a>
+  </div>
+</div>
+</div>
+
+<script>
+function fn_menu_manipola_show() {
+
+	//solo se è stato seleizonatoun oggetto
+	//oltre ad aprire deve anche modificare i valori dell'editor letti dall'elemento selezionato
+
+	//ok alert( glb_strId_elem_selezionato);
+
+	let r = fn_servizo_torna_id_obj_sel();
+	//se esiste
+	
+	//ok alert( r);
+	
+	if (r >= 0) {
+
+		document.getElementById('elm_sidebar_right_01').innerHTML = glb_strId_elem_selezionato; 
+
+		document.getElementById('obj_manipulation_selected_obj_slide1').value = '0';
+		document.getElementById('obj_manipulation_selected_obj_slide2').value = '0'; 
+		document.getElementById('obj_manipulation_selected_obj_slide3').value = '0'; 
+		
+		if (mtrOggetti[r][4] = 1) {
+			document.getElementById('obj_manipulation_selected_obj_slide1').value = mtrOggetti[r][7];
+		}
+		if (mtrOggetti[r][5] = 2) {
+			document.getElementById('obj_manipulation_selected_obj_slide2').value = mtrOggetti[r][7];
+		}	
+		if (mtrOggetti[r][6] = 2) {
+			document.getElementById('obj_manipulation_selected_obj_slide3').value = mtrOggetti[r][7];
+		}		
+
+		document.getElementById('obj_manipulation_selected_obj_color_text').value 		= mtrOggetti[r][13] ; 
+		document.getElementById('obj_manipulation_selected_obj_color_background').value = mtrOggetti[r][14] ; 
+		
+		
+	//show
+	openRightMenu();
+			
+	}	
+
+
+
+	
+}
+
+function openRightMenu() {
+  document.getElementById("rightMenu").style.display = "block";
+  document.getElementById('div_2_piano_mattonelle').style.display = 'block'; //mostra mattonelle
+  
+}
+
+function closeRightMenu() {
+  document.getElementById("rightMenu").style.display = "none";
+  document.getElementById('div_2_piano_mattonelle').style.display = 'none'; //nascondi mattonelle  
+  //toglie il bordo selezione sull'oggetto selezionato
+  document.getElementById(glb_strId_elem_selezionato).style.border = '0px solid black';
+  
+}
+</script>
+
+
+
+<script>
+function fn_ctn_pannello_controlli_toggle() {
+
+	let elm = document.getElementById('ctn_pannello_controlli');
+	
+	if  (elm.style.display == 'none' ) {
+		elm.style.display = 'block';
+	} else if  (elm.style.display == 'block' ) {
+		elm.style.display = 'none';
+	}
+}
+</script>
+
+<script>
+function info() {
+
+	let elmA = document.getElementById(glb_strId_elem_selezionato);
+	//ok let strA = elmA.style.transform;	
+	//let strA = elmA.style.translateX; //undefined
+	//let strA = elmA.style.matrix3d; //undefined
+	//let strA = elmA.style.transform;	//translate3d(400px, 100px, 0px) rotate3d(0, 0, 0, 0deg)	
+	//let strA = elmA.style.translate3d; //undefined
+	let strA = elmA.style.transform;
+
+		document.getElementById('display_4').innerHTML = strA; 
+ 
+}
+</script>
+<script>
+function elimina() {
+	//ok alert( 'e');
+	//elimina sia l'elemento dalla scena che il ricord nel database (matrice)
+	//elimina dal database
+	//trovare l'elemento nel database
+	//serve sapre quale oggetto
+	//Cercare qual è l'array dell'oggetto selezionato - glb_strId_elem_selezionato
+	let r = fn_servizo_torna_id_obj_sel();
+	//se esiste
+	if (r >= 0) {
+
+		alert( mtrOggetti[r][0] );
+		
+		//The splice() method adds or removes array elements.
+		//array.splice(index, count, item1, ....., itemX)
+		// At position 2, remove 1 element
+		//fruits.splice(2, 1);
+		mtrOggetti.splice(r, 1);
+		
+		//elimina dalla scena
+		let elmA = document.getElementById(glb_strId_elem_selezionato);
+		elmA.remove(); 
+		
+	}
+}
+</script>
+<script>
+function modifica() {
+	//solo il testo
+	let elmA = document.getElementById(glb_strId_elem_selezionato);
+	
+	let strA = elmA.textContent;
+	
+	
+	let person = prompt("edit:" + glb_strId_elem_selezionato, strA);
+	if (person == null || person == "") {
+		testo = "User cancelled the prompt.";
+	} else {		
+		testo = person;
+		elmA.textContent = testo;
+	}		
+	
+	
+}
+</script>
+
+
+
+
+
+<script>
+function fn_sistema_space_clear() {
+
+	//ok let aelement = document.getElementById('carta_20240719_230829');			
+	//ok aelement.remove();	
+
+	//prima cancellare anche tutti gli oggetti presenti in scena
+	let element;
+	let strA = '';
+	for (let k = 0; k < 100; k++) {
+		
+		if (mtrOggetti[k][0].length > 1) {
+			strA = mtrOggetti[k][0];
+			//ok 	alert(strA);			
+			element = document.getElementById(strA);			
+			element.remove();		
+		}
+	}		
+	
+	//cancella tutto il contenuto della matrice oggetti -------------------------------------
+	//no let mtrOggetti = Array.from({ length: 101 }, () => Array(51).fill(''));
+	// mtrOggetti = Array.from({ length: 101 }, () => Array(51).fill(''));
+	//ok alert( mtrOggetti[100][50]);
+	for (let k = 0; k < 100; k++) {
+		for (let j = 0; j < 50; j++) {
+			mtrOggetti[k][j] = '';
+		}
+	}
+	//-- reset - fine ------------------------------------------------------------------------
+
+	//ok alert( mtrOggetti);	
+	
+ 
+}
+</script>
+<script>
+function fn_matrice_leggi_csv() {
+
+	//pulisci sia la scena che la memoria matrice oggetti
+	fn_sistema_space_clear();
+
+	document.getElementById('matrice_importa_csv').innerHTML= '';
+	
+	
+	
+	//@240729_162617 leggi dal file archivio_csv.txt che contiene le stesse righe che ho uusato nel textarea per le prove
+	
+	
+	
+	
+
+	//prendere il contenuto di textarea e farlo diventare la matrice, che poi uso per creare oggetti	
+	let strMatrice_importa_contenitore = document.getElementById('matrice_importa_csv');	
+	let strMatrice_importa_csv = strMatrice_importa_contenitore.value;
+	//era value	
+	//ok alert( strMatrice_importa_csv );
+	
+	
+	//scan parse riga
+	//JavaScript String split()	A string can be converted to an array with the split() method:
+	const myArrRighe = strMatrice_importa_csv.split("\n");
+
+	//ok alert( myArrRighe[0]);
+
+
+	for (let k = 0; k < myArrRighe.length; k++) {
+
+		//controlla anche le righe vuote
+		let strRiga = myArrRighe[k];
+		if (strRiga.length > 1) {
+			//ok alert( myArrRighe[k] );
+
+			const myArrDallaRiga = strRiga.split(",");
+	
+			for (let j = 0; j < myArrDallaRiga.length; j++) {
+
+			
+				
+				//ok alert(myArrDallaRiga[j] ); 				
+				
+				//trimmare gli elementi - se il primo carattere è " togli
+				//trimmare gli elementi - se l'ultimo carattere è " togli
+								
+				//JavaScript String charAt() The charAt() method returns the character at a specified index (position) in a string:
+				let strA ;
+					strA = myArrDallaRiga[j];
+				let strchar0 = strA.charAt(0);
+				let strB = strA.substr(0, strA.length);
+				if (strchar0 = '\"' ) {
+					strB = strA.substr(1, strA.length);
+				}
+				
+				let strcharEnd = strB.charAt(strB.length);
+				let strC = strB.substr(0, strB.length);
+				if (strcharEnd = '\"' ) {
+					strC = strB.substr(0, strB.length-1);
+				}
+				
+				//alert( strA + ' ' + strchar0 + ' ' + strB + ' ' + strcharEnd + ' ' + strC );
+	
+				mtrOggetti[k][j] = strC ;
+				
+				//ok alert( mtrOggetti[k][j] );
+			}
+		}
+	  
+	}
+		
+	
+	//ok alert( mtrOggetti[0][0] );
+	
+	//ok alert( mtrOggetti);
+	//ok alert( mtrOggetti[1]);
+	//ok alert( mtrOggetti[0][2]);
+	
+	
+	//funzione che crea gli oggetti nella matrice	
+	fn_crea_oggetti_indicati_nella_matrice_oggetti();
+
+}
+</script>
+<script>
+	function fn_crea_oggetti_indicati_nella_matrice_oggetti() {
+
+	//ciclare tra l'array oggetti - mtrOggetti
+	//ok alert( mtrOggetti);
+	
+	//crea oggetto dall'array		
+	for (i = 0; i < mtrOggetti.length; i++) {
+		//alert( mtrOggetti[i]);		
+		//crea nel div pov, chede il contenuto con un prompt	
+		//alert( mtrOggetti[i][0]);
+
+		//solo se non è una riga vuota - controllo il primo elemento , la prima cella 
+		if ( mtrOggetti[i][0].length > 0 ) {
+			//ok alert( mtrOggetti[i][0]);	
+
+
+
+
+			//adesso devi riconoscere il tipo di oggetto
+			
+			//se è una nota
+			
+			//se è una carta
+			
+			//se è un cristallo
+			
+			//se è un altro oggetto
+			
+			//se è uno sticker
+			
+			//se è un'emoji
+
+			// assegnamo al campo 15 il tipo di oggetto
+			//tipo 1 = nota semplice tipo postit
+			if ( mtrOggetti[i][15] == '1' ) {
+			
+				
+				let newDiv = document.createElement("div");
+				
+				newDiv.textContent = mtrOggetti[i][8];
+				
+				let set_width = mtrOggetti[i][11];
+				let set_height = mtrOggetti[i][12];
+				let set_color = mtrOggetti[i][13];
+				let set_background_color = mtrOggetti[i][14];
+				
+				
+				newDiv.style = 'position: absolute; left: 0px; top: 0px; border:1px solid black; background: '+set_background_color+'; color: '+set_color+'; width: '+set_width+'px; height: '+set_height+'px; font-size: 0.8em; padding: 0.5em; user-select: none;' ;
+				
+				
+				let tra_x = mtrOggetti[i][1];
+				let tra_y = mtrOggetti[i][2];
+				let tra_z = mtrOggetti[i][3];
+				let rot_x = mtrOggetti[i][4];
+				let rot_y = mtrOggetti[i][5];
+				let rot_z = mtrOggetti[i][6];
+				let rot_a = mtrOggetti[i][7];
+				
+				//newDiv.style.transform  = "translate3d(400px,100px,0px) rotate3d( 0,0,0,0deg)" ;	
+				newDiv.style.transform = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)' +  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+				
+				newDiv.id = mtrOggetti[i][0];
+				
+				newDiv.addEventListener("click", function() { fn_obj_pointer_select(newDiv.id); });
+
+				let container = document.getElementById("pov");
+				container.appendChild(newDiv);	
+			}
+			
+			
+			//tipo 2 carta da gioco francese
+			
+			if ( mtrOggetti[i][15] == '2' ) {
+			
+				let str_id = mtrOggetti[i][0];
+			
+				let tra_x = mtrOggetti[i][1];
+				let tra_y = mtrOggetti[i][2];
+				let tra_z = mtrOggetti[i][3];
+				let rot_x = mtrOggetti[i][4];
+				let rot_y = mtrOggetti[i][5];
+				let rot_z = mtrOggetti[i][6];
+				let rot_a = mtrOggetti[i][7];				
+			
+				//crea una carta via script
+				let newSection = document.createElement("section");
+
+				newSection.className  = 'obj_carta';								
+
+				//newSection.style = 'transform: translateX(2000px) translateY(-560px) translateZ(-800px)' ;
+				newSection.style.transform = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)' ;
+				
+				//newSection.id = 'mango';
+				newSection.id = str_id;
+						
+				newSection.addEventListener("click", function() { fn_obj_pointer_select(newSection.id); });
+				
+				//doppioclick non funziona
+				
+
+				let container = document.getElementById("pov");
+				container.appendChild(newSection);	
+						
+						
+						
+				let newDivPivot = document.createElement("div");
+				newDivPivot.className  = 'obj_carta_pivot';
+
+				//newDivPivot.style = 'transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg)' ;				
+				newDivPivot.style.transform = ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+
+				//newDivPivot.id = 'papaya';
+				newDivPivot.id = str_id + '_pivot';			
+				
+				//container = document.getElementById("mango");
+				container = document.getElementById(str_id);
+				container.appendChild(newDivPivot);	
+						
+
+
+
+				//aggiugni div davanti
+				let newDivRect_1 = document.createElement("div");
+
+				//newDivRect_1.className  = 'obj_carta_faccia_1_front_stile_1_default';
+				newDivRect_1.className  = mtrOggetti[i][16] ;
+
+				newDivRect_1.id = str_id + 'Rect_1';		
+				
+				//container = document.getElementById("papaya");
+				container = document.getElementById(str_id + '_pivot');
+				
+				container.appendChild(newDivRect_1);	
+
+
+					//aggiugni iframe
+					let newIframe = document.createElement("iframe");
+
+					//newIframe.style = 'width: 100% ; height: 100% ; border:0px solid black;' ;					
+					newIframe.style = 'width: 100% ; height: 100% ; border:0px solid black;  pointer-events: none; ' ;
+																							//aggiungo per evitare l'interazione con l'iframe su onmousemove
+
+					//newIframe.src = 'iframes/240728_205457.html';
+					newIframe.src  = 'iframes/'+ mtrOggetti[i][19] ;
+					
+					
+					//container = document.getElementById("Rect_1");
+					container = document.getElementById(str_id + 'Rect_1');
+					container.appendChild(newIframe);				
+
+
+
+
+				//aggiugni div centro
+				let newDivRect_2 = document.createElement("div");
+
+				//newDivRect_2.className  = 'obj_carta_faccia_2_centro_stile_3_rosso_a';
+				newDivRect_2.className  = mtrOggetti[i][17] ;
+
+				newDivRect_2.id = 'Rect_2';			
+
+				newDivRect_2.innerHTML	= '&nbsp;';
+				
+				//container = document.getElementById("papaya");
+				container = document.getElementById(str_id + '_pivot');
+				container.appendChild(newDivRect_2);				
+
+
+
+
+						
+				//aggiugni div dietro dorso
+				let newDivRect_3 = document.createElement("div");
+
+				//newDivRect_3.className  = 'obj_carta_faccia_3_dorso_stile_1_default';
+				newDivRect_3.className  = mtrOggetti[i][18] ;
+
+				newDivRect_3.id = 'Rect_3';		
+
+				newDivRect_3.innerHTML	= '&nbsp;';	
+				
+				//container = document.getElementById("papaya");
+				container = document.getElementById(str_id + '_pivot');
+				container.appendChild(newDivRect_3);	
+						
+						
+
+
+			
+			
+			
+			
+			
+			
+			
+			}
+			
+		}
+	}	
+}
+</script>
+
+
+<script>
+function fn_matrice_esporta_csv() {
+
+	//ok alert( mtrOggetti );
+	//scrive nel formato csv il contenuto della matrice per un copia e incolla fuori
+	
+	let strA = '';
+	let strB = '';
+	let strC = '';
+	for (let k = 0; k < 100; k++) {
+		for (let j = 0; j < 50; j++) {
+			strA += '"' + mtrOggetti[k][j] +'",';
+		}
+		strB = strA.substr(0, strA.length-1);	//toglie l'ultima virgola
+		strC += strB + '\n' ;					//aggiunge accapo 
+		strA ='';								//reset della variabile
+	}	
+	
+	//pulisco
+	strC = strC.replaceAll(",\"\"","");
+	strC = strC.replaceAll("\"\"\n","");
+	
+	
+	document.getElementById('matrice_esporta_csv').innerHTML = strC; 
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!--  pulsante che crea una carta - javascript dopo il contenitore -->
+<button type="button" style=" position: fixed; right: 50px; bottom: 30px; background: navy; color: yellow; font-size: 1.5em; z-index:10;"
+		onclick="fn_oggetti_carta_francese_crea_nuova()"
+		>+ carta da gioco</button> 
+
+
+
+<!--  pulsante che crea una carta - javascript dopo il contenitore -->
+<button type="button" style=" position: fixed; right: 50px; bottom: 100px; background: navy; color: yellow; font-size: 2.5em; z-index:10;"
+		onclick="fn_oggetti_crea_carta()"
+		>+</button> 
+
+
+
+<!--  presp -->
+<div id="div1" style="position: relative; left: 0px; top: 0px;  width: 1654px; height: 858px;  border:0px solid orange; 
+						perspective: 600px; perspective-origin: 50% 50%;">
+						
+	<!--  questo è il contenitore per muovere tutto -->
+	<div id="pov" style="position: absolute; left: 0px; top: 0px; width: 1000px; height: 1000px; background:none;
+							transform-style: preserve-3d;" >
+			
+				
+
+				<!--  questo è un piano orizzontale, ottenuto ruotando di 90 gradi in avanti sull'asse x -->							
+			<div id="div2" style="position: absolute; left: 0px; top:0px; width: 10000px ; height: 4800px; 
+									backgr ound-color: red; opaci ty: 0.5;
+									transform: rotateX(90deg) translateX(0px) translateY(-2000px) translateZ(2400px) ; 
+									">				
+				<!--  griglia disegnata su canvas -->
+			</div>			
+			<script>
+			let strA = '';
+			strA = '<svg xmlns="http://www.w3.org/2000/svg"  style="position: absolute; left: 0px; top: 0px; width: 10000px ; height: 4800px; border:0px solid #d3d3d3;" >'
+
+			for (let k = 0; k <= 4800; k+=400) {
+				for (let j = 0; j <= 10000; j+=400) {
+					strA += '<rect width="400" height="400" x="'+ j +'" y="'+ k +'" style="fill:rgb(0,0,50);;stroke-width:3;stroke:silver" />' ;
+					
+				} 
+			}
+			
+			strA += '</svg>';
+			
+			document.getElementById('div2').innerHTML = strA ; 
+			</script>
+	
+	
+	
+		
+	
+	<!--  piano del tavolo -->
+	<!--  tavolo 1 -->
+	<section class="obj_tavolo_piano">
+		<div id="" class="obj_tavolo_piano_pivot" style="">
+			<div id="" class="tavolo_piano_avanti" style="text-align:center; font-size: 18em; ">TAVOLO #1</div>
+			<div id="" class="tavolo_piano_dietro" style="">&nbsp;</div>
+			<div id="" class="tavolo_piano_sinistra" style="">&nbsp;</div>
+			<div id="" class="tavolo_piano_destra" style="">&nbsp;</div>
+			<div id="" class="tavolo_piano_sotto" style="">&nbsp;</div>						
+		</div> 
+	</section>
+
+
+	<section class="obj_tavolo_base">
+		<div id="" class="obj_tavolo_base_pivot" style="">
+			<div id="" class="tavolo_base_avanti" style="">&nbsp;</div>
+			<div id="" class="tavolo_base_dietro" style="">&nbsp;</div>
+			<div id="" class="tavolo_base_sinistra" style="">&nbsp;</div>
+			<div id="" class="tavolo_base_destra" style="">&nbsp;</div>
+			<div id="" class="tavolo_base_sotto" style="">&nbsp;</div>						
+		</div> 
+	</section>
+	
+	<!--  stanza -->
+	<section class="obj_stanza">
+		<div id="" class="obj_stanza_pivot" style="">
+			<div id="" class="obj_stanza_pavimento" style="">&nbsp;</div>
+			<div id="" class="obj_stanza_parete_dietro" style="">&nbsp;</div>
+		</div> 
+	</section>	
+	
+	
+	
+
+					<!--  ancora sopra una serie di matonelle con cui interagire per manipolare i panneli carte-->
+			
+			<div id="div_2_piano_mattonelle" style="position: absolute; left: 0px; top:0px; width: 10000px; height: 4800px; z-index:2;
+									display:none; 
+									transform: rotateX(90deg) translateX(0px) translateY(-2000px) translateZ(2400px) ; 
+									">
+				<script>
+					
+					for (let k = 0; k < 4800; k+=400) {
+						for (let j = 0; j < 10000; j+=400) {						
+							document.write('<div id="" style="position: absolute; left: 0px; top:0px;');
+							document.write('transform: translate3d('+j+'px,'+k+'px, 0px); ');
+							document.write('width: 400px; height: 400px; ');
+							document.write('background: cyan; border:3px solid black; " ');
+							document.write('onClick="fn_obj_manipulation_translate('+j+','+k+');" ');
+							document.write('onmouseenter="this.style.background= \'navy\'; " ');
+							document.write('onmouseleave="this.style.background= \'cyan\'; " ><br></div>' );						
+						}
+					}
+					
+				</script>
+				<!--  sopra gli elementi generati a runtime -->
+			</div> 		
+		
+		
+		
+		
+		
+		
+			<script>
+			function fn_obj_manipulation_translate (intIncA, intIncB) {				
+				
+				//offset
+				let intX = intIncA + 0;
+				let intZ = intIncB - 4400;
+				
+				//ok ma senza offset document.getElementById('contenitore_carta').style.transform = 'translate3d('+ intIncA +'px,0px,'+ intIncB +'px)' ;				
+				//document.getElementById('contenitore_carta').style.transform = 'translate3d('+ intX +'px,0px,'+ intZ +'px)' ;				
+				//document.getElementById(glb_strId_elem_selezionato).style.transform = 'translate3d('+ intX +'px,0px,'+ intZ +'px)' ;
+				//let strA = elmA.style.transform;	//translate3d(400px, 100px, 0px) rotate3d(0, 0, 0, 0deg);
+				//let strA = elmA.style.transform;				
+				//parsing delle proprietà no				
+				//stanno scritte nell'array
+				
+				
+				//serve sapre quale oggetto
+				//Cercare qual è l'array dell'oggetto selezionato - glb_strId_elem_selezionato
+				let r = fn_servizo_torna_id_obj_sel();
+				//----------------------------------------------------------------------------
+				//se esiste
+				if (r >= 0) {
+					
+					//scrivere nell'array la nuova posizione
+					mtrOggetti[r][1] = intX;
+					mtrOggetti[r][3] = intZ;
+					
+					//poi leggo tutto e faccio lo spostamento // vedi che è 0 based
+					let tra_x = mtrOggetti[r][1];
+					let tra_y = mtrOggetti[r][2];
+					let tra_z = mtrOggetti[r][3];
+					let rot_x = mtrOggetti[r][4];
+					let rot_y = mtrOggetti[r][5];
+					let rot_z = mtrOggetti[r][6];
+					let rot_a = mtrOggetti[r][7];
+									
+					document.getElementById(glb_strId_elem_selezionato).style.transform = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)'+  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+					
+					document.getElementById('display_4').innerHTML = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)'+  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+					
+					//translate3d(550px,100px,200px) rotate3d(0,0,0,0deg)
+					
+				}
+			}
+			</script>
+
+		
+
+
+<!--  ----------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--  ------- CARTE            ---------------------------------------------------------------------------------------------------------------- -->
+<!--  ----------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--  ----------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  ----------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--  ----------------------------------------------------------------------------------------------------------------------------------------- -->
+			
+
+	</div>
+	<!--  contenitore -->
+	
+</div>
+<!--  fine del contenitore prospettiva -->
+
+
+
+
+
+
+<script>
+function fn_oggetti_carta_francese_crea_nuova() {
+	//crea nel div pov, chede il contenuto con un prompt
+
+	let testo;
+	let person = prompt("new object: carta", "descrizione breve");
+	if (person == null || person == "") {
+		//testo = "User cancelled the prompt.";
+	} else {		
+		testo = person;
+	}		
+	const newDiv = document.createElement("div");
+	let strT = fn_torna_timestamp();
+	
+	newDiv.textContent = testo;
+	
+
+	//crea record nella matrice
+	
+	//ma prima deve trovare una posizione libera nell'array
+	let r = fn_servizo_torna_id_prima_riga_vuota();	
+	//ok alert( r);
+	
+	newDiv.id = "carta_" + strT ;//card_20240719_152339 [card]_[timestamp]	
+	
+	mtrOggetti[r][0] = newDiv.id ;
+	
+	//set valori defalut
+	let tra_x = 0 ;
+	let tra_y = -400 ;
+	let tra_z = 0 ;
+	let rot_x = 0 ;
+	let rot_y = 0 ;
+	let rot_z = 0 ;
+	let rot_a = 0 ;
+	
+	mtrOggetti[r][1] = tra_x ;
+	mtrOggetti[r][2] = tra_y ;
+	mtrOggetti[r][3] = tra_z ;
+	mtrOggetti[r][4] = rot_x ;
+	mtrOggetti[r][5] = rot_y ;
+	mtrOggetti[r][6] = rot_z ;
+	mtrOggetti[r][7] = rot_a ;
+	
+	mtrOggetti[r][8] = newDiv.textContent;
+	
+	mtrOggetti[r][9] = true;	//un booleano tipo per visibilità
+	mtrOggetti[r][10] = strT;	//timestamp
+	
+	let set_width  = 400 ;
+	let set_height = 400 ;
+	let set_color  = '#000000';	//'black' ;
+	let set_background_color = 	'#FFA500' //'orange' ;
+
+	mtrOggetti[r][11] = set_width ;
+	mtrOggetti[r][12] = set_height ;
+	mtrOggetti[r][13] = set_color ;
+	mtrOggetti[r][14] = set_background_color ;
+	
+			
+	newDiv.style = 'position: absolute; left: 0px; top: 0px; border:1px solid black; background: '+set_background_color+'; color: '+set_color+'; width: '+set_width+'px; height: '+set_height+'px; font-size: 2em; padding: 0.5em; user-select: none;' ;
+	
+	//newDiv.style.transform  = "translate3d(400px,100px,0px) rotate3d( 0,0,0,0deg)" ;	
+	newDiv.style.transform  = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)'+  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+	
+
+	
+	newDiv.addEventListener("click", function() { fn_obj_pointer_select(newDiv.id); });
+
+	const container = document.getElementById("pov");
+	container.appendChild(newDiv);
+
+
+	
+
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function fn_oggetti_crea_carta() {
+	//crea nel div pov, chede il contenuto con un prompt
+
+	let testo;
+	let person = prompt("new object: carta", "descrizione breve");
+	if (person == null || person == "") {
+		//testo = "User cancelled the prompt.";
+	} else {		
+		testo = person;
+	}		
+	const newDiv = document.createElement("div");
+	let strT = fn_torna_timestamp();
+	
+	newDiv.textContent = testo;
+	
+
+	//crea record nella matrice
+	
+	//ma prima deve trovare una posizione libera nell'array
+	let r = fn_servizo_torna_id_prima_riga_vuota();	
+	//ok alert( r);
+	
+	newDiv.id = "carta_" + strT ;//card_20240719_152339 [card]_[timestamp]	
+	
+	mtrOggetti[r][0] = newDiv.id ;
+	
+	//set valori defalut
+	let tra_x = 0 ;
+	let tra_y = -400 ;
+	let tra_z = 0 ;
+	let rot_x = 0 ;
+	let rot_y = 0 ;
+	let rot_z = 0 ;
+	let rot_a = 0 ;
+	
+	mtrOggetti[r][1] = tra_x ;
+	mtrOggetti[r][2] = tra_y ;
+	mtrOggetti[r][3] = tra_z ;
+	mtrOggetti[r][4] = rot_x ;
+	mtrOggetti[r][5] = rot_y ;
+	mtrOggetti[r][6] = rot_z ;
+	mtrOggetti[r][7] = rot_a ;
+	
+	mtrOggetti[r][8] = newDiv.textContent;
+	
+	mtrOggetti[r][9] = true;	//un booleano tipo per visibilità
+	mtrOggetti[r][10] = strT;	//timestamp
+	
+	let set_width  = 400 ;
+	let set_height = 400 ;
+	let set_color  = '#000000';	//'black' ;
+	let set_background_color = 	'#FFA500' //'orange' ;
+
+	mtrOggetti[r][11] = set_width ;
+	mtrOggetti[r][12] = set_height ;
+	mtrOggetti[r][13] = set_color ;
+	mtrOggetti[r][14] = set_background_color ;
+	
+			
+	newDiv.style = 'position: absolute; left: 0px; top: 0px; border:1px solid black; background: '+set_background_color+'; color: '+set_color+'; width: '+set_width+'px; height: '+set_height+'px; font-size: 2em; padding: 0.5em; user-select: none;' ;
+	
+	//newDiv.style.transform  = "translate3d(400px,100px,0px) rotate3d( 0,0,0,0deg)" ;	
+	newDiv.style.transform  = 'translate3d('+tra_x+'px,'+tra_y+'px,'+tra_z+'px)'+  ' rotate3d('+rot_x+','+rot_y+','+rot_z+','+rot_a+'deg)';
+	
+
+	
+	newDiv.addEventListener("click", function() { fn_obj_pointer_select(newDiv.id); });
+
+	const container = document.getElementById("pov");
+	container.appendChild(newDiv);
+
+
+	
+
+}
+</script>
+<script>
+function fn_obj_pointer_select(strIncId) {
+	//colora il bordo dell'oggetto	
+	//Ma prima devo deselezionare tutte le altre 	
+	for (let k = 0; k < 100; k++) {
+		if ( mtrOggetti[k][0].length > 0 ) {	
+			document.getElementById(mtrOggetti[k][0]).style.border = '0px solid black' ;		
+		}
+	}
+	//scrive l'id dell'elemento selezionato con il puntatore
+	//ok alert( strIncId);	
+	document.getElementById(strIncId).style.border = "5px solid yellow";	
+	document.getElementById('display_3').innerHTML = strIncId; //ok	
+	glb_strId_elem_selezionato = strIncId; //set nella variabile globale	
+	//ok alert( glb_strId_elem_selezionato);
+}
+</script><!-- fine script contenitore pov (almeno una parte) -->
+
+
+
+
+
+
+
+
+
+<!--  controlli -->
+<div class="w3-container w3-small"  id="ctn_pannello_controlli"
+		style="position: fixed; left: 0px; top: 0px;  width: 250px; height: 100%;  
+				border:2px solid orange; padding: 0.5em; background: navy; opacity:0.7; color: yellow; overflow:auto; display:none; " >
+
+<div id="" class="" style="height: 120px;overflow:auto;">
+<div>div 1 - parent</div>
+Change perspective: <span id="persp_label">611</span><br>
+<input type="range" min="45" max="5000" value="1000" onChange="changePersp(this.value)" id="persp"><br>
+
+<br>
+perspective-origin: <span id="opersp_label">50% 54%</span><br>
+X-axis:<input type="range" min="-100" max="200" value="50" onChange="changeOrgPersp()" id="operspx"><br>
+Y-axis:<input type="range" min="-100" max="200" value="50" onChange="changeOrgPersp()" id="operspy"><br>
+
+<hr>
+<div>div2 - rosso</div>
+Change the size: <span id="slider_size_label">1000px 1000px</span><br>
+width: <input type="range" min="0" max="2000" value="1000" onChange="changeSize()" id="slider_size_w"><br>
+height:<input type="range" min="0" max="2000" value="1000" onChange="changeSize()" id="slider_size_h"><br>
+
+<hr>
+Change rotation_x: <span id="slider_rotation_x_label">68 deg</span><br>
+rotationX: <input type="range" min="0" max="90" value="60" onmousemove="changeRotationX()" id="slider_rotation_x"><br>
+
+<hr>
+Change position: <span id="slider_position_label">-46px -189px</span><br>
+x: <input type="range" min="-500" max="500" value="400" onmousemove="changePosition()" id="slider_position_x"><br>
+y: <input type="range" min="-500" max="500" value="-60" onmousemove="changePosition()" id="slider_position_y"><br>
+
+<hr>
+Change the scale: <span id="slider_scale_label">1.0 1.0</span><br>
+x: <input type="range" min="0" max="500" value="100" onmousemove="changeScale()" id="slider_scale_x"><br>
+y: <input type="range" min="0" max="800" value="100" onmousemove="changeScale()" id="slider_scale_y"><br>
+
+</div> 
+<hr>
+<hr>
+Change tra_3d: <span id="slider_translate3d_label">0 0 0 </span><br>
+x: <input type="range" min="-20000" max="20000" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_translate3d_x"><br>
+y: <input type="range" min="-20000" max="20000" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_translate3d_y"><br>
+z: <input type="range" min="-20000" max="20000" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_translate3d_z"><br>
+
+
+
+<button type="button" onclick="	document.getElementById('pov').style.transform = 'translate3d(100px,100px,100px)' ;">pov</button> 
+<button type="button" onclick="	document.getElementById('pov').style.transform = 'translate3d(100px,200px,100px)' ;">pov y</button> 
+<button type="button" onclick="	document.getElementById('pov').style.transform = 'translate3d(100px,200px,-400px)' ;">pov z</button> 
+
+<hr>
+Change rot_3d: <span id="slider_rotate3d_label">0 0 0 </span><br>
+x: <input type="range" min="-1" max="1" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_rotate3d_x"><br>
+y: <input type="range" min="-1" max="1" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_rotate3d_y"><br>
+z: <input type="range" min="-1" max="1" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_rotate3d_z"><br>
+a: <input type="range" min="-180" max="180" value="0" onmousemove="changeTranslate3d_e_rotate3d()" id="slider_rotate3d_a"><br>
+
+
+<hr>
+
+
+<button type="button" onclick="fn_pov_rotate_x_top()">pov: top</button> 
+<button type="button" onclick="fn_pov_rotate_x_front()">pov: front</button> 
+<button type="button" onclick="fn_pov_reset()">pov: reset</button> 
+
+
+
+
+
+
+<hr>
+
+
+	<div id="" class="" style="color: yellow; opacity:0.7; ">	Change translateZ:<br>
+	<input type="range" min="-1000" max="1000" value="0" onmousemove="changeY_singolo()" id="slide_changeY_singolo" style=" width: 100% ;"><br>
+	perspective: <span id="slide_changeY_singolo_label">0</span>;<br>
+
+	</div>
+
+
+	<script>
+	function changeY_singolo()
+	{
+		let move_y=document.getElementById('slide_changeY_singolo').value;
+		
+		//document.getElementById('tacchino').style.transform = "translateZ(" + tra_z + "px)" ;
+		
+		//invece voglio modificare solo quel dettagli della proprietà
+		document.getElementById('div2').style.top = move_y + "px" ;
+		
+		document.getElementById('slide_changeY_singolo_label').innerHTML = tra_z ;
+		
+	}
+	</script>
+
+
+<br>
+<button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button>
+
+
+
+<div id="demo" class="" style="font-size: 2em; "></div> 
+
+<div id="display_10" class="" style="font-size: 2em; "></div> 
+
+
+</div>
+
+<script>
+
+var pov_is_top = false;
+
+
+function fn_pov_rotate_x_top() {
+	//alert( 'top');
+	
+	//prima di fare devo salvare la posizione precedente di pov
+	//perchè poi cancella tutto
+	//dopo
+	
+	pov_is_top  = true;
+	
+	
+	//nascondere gli elementi e mettere dei placeholder perchè i pannelli dall'alto non sono gestibili
+	
+	document.getElementById('pov').style.transform = 'rotateX(-90deg)' + 'translateX(-500px)' + 'translateY(4500px)' + 'translateZ(-100px)';
+	
+	
+}
+</script>
+<script>
+function fn_pov_rotate_x_front() {
+	//alert( 'front');
+	
+	pov_is_top  = false;
+	
+	document.getElementById('pov').style.transform = 'rotateX(-10deg)' ;
+	
+}
+</script>
+<script>
+function fn_pov_reset() {
+	//alert( 'front');	
+	pov_is_top  = false;	
+	document.getElementById('pov').style.transform = "translate3d(-3226px,645px,-5484px) rotate3d( 1,0,0,-44deg)" ;	
+
+	document.getElementById('slider_translate3d_x').value = -3226;
+	document.getElementById('slider_translate3d_y').value = 645;
+	document.getElementById('slider_translate3d_z').value = -5484;
+
+	document.getElementById('slider_rotate3d_x').value = 1; 
+	document.getElementById('slider_rotate3d_y').value = 0; 
+	document.getElementById('slider_rotate3d_z').value = 0; 
+	document.getElementById('slider_rotate3d_a').value = -44; 
+
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  ------------------------------------------------------------------------------------------------- -->
+  <div id="ctn_modale_obj_001_carta" class="" 
+	style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index:40; overflow:hidden; display:none; ">
+	<!--  pannello che blocca l'interazione del mouse sulla scena -->
+	<div id="" class="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100% ;background: #333; opacity:0.7;">&nbsp;</div> 
+  
+  
+    <div class="w3-container w3-round" style="position: absolute; left: 0px; top: 0px; width: 80%; height: 90%; margin-top: 0.5em; margin-left: 10%; ">
+      <header class="w3-container w3-teal w3-round" style=""> 
+        <span onclick="fn_menu_ctn_modale_obj_001_carta_hide()" class="w3-button w3-right w3-round w3-xlarge">&times;</span>
+        <div>oggetto / carta</div>
+		<div id="ctn_modale_obj_001_carta_footer_label">carta</div>
+      </header>
+      <div class="w3-container" id="ctn_modale_obj_001_carta_centrale" style="margin:0px;padding:0px; background: silver;  height: 90vh;">
+		<!--  carta -->
+		height: 90vh;
+      </div>
+    </div>
+  </div>
+
+<script>
+function fn_menu_ctn_modale_obj_001_carta_show() {
+
+	//disabilita l'onmousemove settando glb_bln_3d_pov_mouse_move_enable a false
+	
+	glb_bln_3d_pov_mouse_move_enable = false;
+
+	//ok	prendere l'id della carta	
+	//		usarlo per individuare la riga della matrice
+	//		prendere il nome del file html usato nell'iframe
+	//		mettere un iframe nel modale con crea o innerHTML
+	//		mostrare il modale
+
+	//Cercare qual è l'array dell'oggetto selezionato - glb_strId_elem_selezionato
+	let r = fn_servizo_torna_id_obj_sel();
+	//----------------------------------------------------------------------------
+	//se esiste //è zero index
+	if (r >= 0) {
+
+		
+		let strA = '<iframe src="iframes/'+mtrOggetti[r][19]+'" style="width: 100% ; height: 100% ; border:0px solid black;" ></iframe>' ;
+		
+		document.getElementById('ctn_modale_obj_001_carta_centrale').innerHTML = strA ;
+
+		
+
+
+		document.getElementById('ctn_modale_obj_001_carta_footer_label').innerHTML = glb_strId_elem_selezionato ;
+		document.getElementById('ctn_modale_obj_001_carta').style.display='block';	
+	}	 
+}
+
+
+function fn_menu_ctn_modale_obj_001_carta_hide() {
+	glb_bln_3d_pov_mouse_move_enable = true;
+	document.getElementById('ctn_modale_obj_001_carta').style.display='none';	
+}
+</script>
+
+
+
+
+
+
+
+
+
+<!--  ------------------------------------------------------------------------------------------------- -->
+  <div id="ctn_modale_obj_901_tutti" class="" 
+	style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index:40; overflow:hidden; display:none; ">
+	<!--  pannello che blocca l'interazione del mouse sulla scena -->
+	<div id="" class="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100% ;background: #333; opacity:0.7;">&nbsp;</div> 
+  
+	<!--  modale contenitore -->
+    <div class="w3-container w3-round" style="position: absolute; left: 0px; top: 0px; width: 80%; height: 90%; margin-top: 0.5em; margin-left: 10%; ">
+      <header class="w3-container w3-teal w3-round" style=""> 
+        <span onclick="fn_menu_ctn_modale_obj_901_tutti_hide()" class="w3-button w3-right w3-round w3-xlarge">&times;</span>
+        <div>oggetto / tutti</div>
+		<div id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">carta</div>
+		<button type="button" onclick="aaaaaaaaaaa()">aaaaaaaaaaa</button> 
+      </header>
+      <div class="w3-container" id="ctn_modale_obj_901_tutti_centrale" style="margin:0px;padding:0px; background: silver;  height: 90vh;">
+		
+<h2>Filter Table</h2>
+
+<p>Search for a name in the input field:</p>
+
+<p>
+<input oninput="w3.filterHTML('#ctn_modale_obj_901_tutti_centrale_table', '.item', this.value)" placeholder="Search for names..">
+</p>
+
+<table id="ctn_modale_obj_901_tutti_centrale_table" border="1">
+  <tr>
+    <th>Customer</th>
+    <th>City</th>
+    <th>Country</th>
+  </tr>
+  <tr class="item">
+    <td>aaaaaaaaaa</td>
+    <td>bbbbbbbbbbbb</td>
+    <td>ccccccccccccc</td>
+  </tr>
+</table>
+
+		
+      </div>
+    </div>
+  </div>
+
+<script>
+function fn_menu_ctn_modale_obj_901_tutti_show() {
+
+	//disabilita l'onmousemove settando glb_bln_3d_pov_mouse_move_enable a false	
+	glb_bln_3d_pov_mouse_move_enable = false;
+	
+	
+	//ciclare tutta la matrice	
+	let f = mtrOggetti.entries();
+	intLastElemId = 0;	
+	for (let x of f) {
+		intLastElemId +=1;
+	}
+	
+	//ok è diverso alert(intLastElemId + ' ' + f ); 101 [object Array Iterator]
+	//per avere un valore dinamico, anche se	
+	//adesso intLastElemId è valorizzato con il numero di "righe" della matrice - 101	
+	//adesso ricerca con un bound vero	
+	
+	//Cicla nella matrice andando a individuare qual è la riga tra virgolette dell' id selezionato, come se fosse un database
+	let strB = '';
+	for (let k = 0; k < intLastElemId-1; k++) {					
+		
+		
+		
+		if ( strA.length > 0 ) {								
+			
+			strB += '<tr class="item">';	
+			for (let i = 0; i < 20; i++) {
+				strB += '<td>' + mtrOggetti[k][i] + '</td>';
+			} 		
+			strB += '</tr>';
+		}
+	}
+
+	
+	document.getElementById('ctn_modale_obj_901_tutti_centrale_table').innerHTML = strB; 
+	
+	
+/*
+		
+		let strA = '<iframe src="iframes/'+mtrOggetti[r][19]+'" style="width: 100% ; height: 100% ; border:0px solid black;" ></iframe>' ;
+		
+		document.getElementById('ctn_modale_obj_901_tutti_centrale').innerHTML = strA ;
+
+		
+
+
+		document.getElementById('ctn_modale_obj_901_tutti_footer_label').innerHTML = glb_strId_elem_selezionato ;
+	*/	
+		
+	
+	//c'è il caso con zero oggetti
+	document.getElementById('ctn_modale_obj_901_tutti').style.display='block';	
+	
+}
+
+
+function fn_menu_ctn_modale_obj_901_tutti_hide() {
+	glb_bln_3d_pov_mouse_move_enable = true;
+	document.getElementById('ctn_modale_obj_901_tutti').style.display='none';	
+}
+</script>
+
+
+<script>
+function aaaaaaaaaaa() {
+ 	//test querySelector @ 240805_124120
+	let intA = 0;
+	const nodeList = document.querySelectorAll(".item");
+	for (let i = 0; i < nodeList.length; i++) {
+		//nodeList[i].style.backgroundColor = "red";
+
+		let firstCell = nodeList[i].querySelector("td");
+		let strA = firstCell.innerHTML;
+		//ok alert( strA);
+		
+		if (strA.length > 0 ) {
+			
+			let strB = nodeList[i].style.display;	//stato dell'attributo style
+			//ok alert( strB); vuoto o none
+			
+			if (strB === 'none') {
+				//se è none nascodni elemento nella scena
+				
+				//test colora
+				//if (strA.length > 1 ) {
+				//	firstCell.style.background = 'red' ;
+				//}
+				
+				//usa il valore della cella per interventise sull'ggetto nella scena
+				
+				document.getElementById(strA).style.display = 'none'; 
+				
+			} else {
+				document.getElementById(strA).style.display = 'block'; 
+				intA +=1; //conta quelli rimasti, non nascosti con display:none
+			}
+			
+		}
+	}
+	
+	document.getElementById('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa').innerHTML = intA; 
+
+}
+</script>
+
+
+
+
+
+
+
+
+<!--  ------------------------------------------------------------------------------------------------- -->
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-round">
+      <header class="w3-container w3-teal w3-round"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright w3-round">&times;</span>
+        <h2>Modal Header</h2>
+      </header>
+      <div class="w3-container">
+
+<div id="display_1" class="" style="color: yellow; background: blue; ">a</div> 
+
+<div id="display_2" class="" style="color: yellow; background: blue; margin-top: 0.5em; ">b</div> 
+
+<div id="display_3" class="" style="color: yellow; background: blue; margin-top: 0.5em; ">card_20240719_163243</div> 
+
+<div id="display_4" class="" style="color: yellow; background: blue; margin-top: 0.5em; ">info</div> 
+
+<div id="display_5" class="" style="color: yellow; background: blue; margin-top: 0.5em; ">display_5</div> 
+
+
+<hr>
+<div id="" class="" style=" width: 100% ; overflow:auto; ">
+<textarea id="matrice_importa_csv" rows="4" style=" width: 1000% ; font-size: 0.8em; ">
+"carta_20240719_230829","400","-200","0","0","0","0","0","tacchino","true","20240719_230829","200","200","black","orange","1"
+"carta_20240719_230830","400","-200","-400","0","0","0","0","tacchino","true","20240719_230830","200","200","black","red","1"
+"carta_20240719_230831","400","-200","-800","0","0","0","0","tacchino","true","20240719_230831","200","200","black","blue","1"
+
+"carta_20240729_161635","400","-560","-1200","0","0","0","0","tacchino","true","20240729_161635","","","","","2","obj_carta_faccia_1_front_stile_1_default","obj_carta_faccia_2_centro_stile_3_rosso_a","obj_carta_faccia_3_dorso_stile_1_default","240728_205457.html"
+</textarea> 
+
+
+<!--  
+nota semplice
+
+"carta_20240719_230829","400","100","0","0","0","0","0","tacchino","true","20240719_230829","200","200","black","orange","1"
+
+mtrOggetti[0][0]
+
+ 0 "carta_20240719_230829"
+ 1 "400"
+ 2 "100"
+ 3 "0"
+ 4 "0"
+ 5 "0"
+ 6 "0"
+ 7 "0"
+ 8 "tacchino"
+ 9 "true"
+10 "20240719_230829"
+11 "200"
+12 "200"
+13 "black"
+14 "orange"
+
+14 "1" tipo di oggetto: 1 nota semplice, 2 carta , 3 altro
+
+
+carta francese
+
+"carta_20240719_230829","400","100","0","0","0","0","0","tacchino","true","20240719_230829","","","","","2",
+																										   ,
+"obj_carta_faccia_1_front_stile_1_default","obj_carta_faccia_2_centro_stile_3_rosso_a","obj_carta_faccia_3_dorso_stile_1_default","240728_205457.html"
+
+15 1,2	tipo
+16 stile front 		obj_carta_faccia_1_front_stile_1_default
+17 stile center 	obj_carta_faccia_2_centro_stile_3_rosso_a
+18 stile dorso 		obj_carta_faccia_3_dorso_stile_1_default
+19 scr iframe 		240728_205457.html								nome del file che iframe va a includere
+
+
+
+ -->
+
+
+
+
+
+
+<textarea id="matrice_esporta_csv" rows="4" style=" width: 1000% ; font-size: 0.8em; ">
+
+</textarea> 
+</div> 
+<hr>
+<div id="" class="" style=" width: 100% ; height: 10em; overflow:auto; ">
+
+	<div id="" class="" style="width: 1000%; color: brown;">
+	<button type="button" onclick="mango()">TACCHINO</button> 
+
+	<p id="demo"></p>
+</div> 
+<script>
+function mango() {
+ 
+	//clear
+	document.getElementById("demo").innerHTML = '';
+ 
+	//const fruits = ["Banana", "Orange", "Apple", "Mango"];
+	//const f = fruits.entries();
+	let f = mtrOggetti.entries();
+
+	for (let x of f) {
+	  document.getElementById("demo").innerHTML += x + "<br>";
+	}
+	
+	/*
+	let f = mtrOggetti.entries();
+	intA = 0;
+	for (let x of f) {
+		intA +=1;
+	}
+	alert( intA);
+	*/
+}
+</script>
+</div> 
+
+<!--  
+"carta_20240719_230829","400","100","0","0","0","0","0","tacchino","true","20240719_230829","200","200","black","orange"
+"carta_20240719_230829","400","100","100","0","0","0","0","tacchino","true","20240719_230829","200","200","black","orange"
+"carta_20240719_230829","400","100","200","0","0","0","0","tacchino","true","20240719_230829","200","200","black","orange"
+ -->
+ <!--  
+3,3
+ -->
+
+
+
+
+      </div>
+      <footer class="w3-container w3-teal w3-round">
+        <p>Modal Footer</p>
+      </footer>
+    </div>
+  </div>
+
+
+
+
+
+
+
+<!--  ------------------------------------------------------------------------------------------------- -->
+<script>
+function fn_servizo_torna_id_obj_sel() {
+	//Faccio una ricerca nella matrice usando l'id dell'oggetto selezionato 
+	//Questo ID si trova già in una variabile globale  
+	//Cercare qual è l'array dell'oggetto selezionato - glb_strId_elem_selezionato	
+	let f = mtrOggetti.entries();
+	intLastElemId = 0;	
+	for (let x of f) {
+		intLastElemId +=1;
+	}
+	//per avere un valore dinamico, anche se	
+	//adesso intLastElemId è valorizzato con il numero di "righe" della matrice - 101	
+	//adesso ricerca con un bound vero	
+	
+	//Cicla nella matrice andando a individuare qual è la riga tra virgolette dell' id selezionato, come se fosse un database
+	for (let k = 0; k < intLastElemId-1; k++) {	
+		if ( mtrOggetti[k][0] == glb_strId_elem_selezionato ) {						
+			return k ; 
+			break;
+		}
+	}
+	return -1;	//beneeeeeeeeeeeeeeeee
+}
+</script>
+<!--  ------------------------------------------------------------------------------------------------- -->
+<script>
+function fn_servizo_torna_id_prima_riga_vuota() {
+	
+	//Questo sistema questa funzione mi servirà anche dopo tutte le volte che devo creare aggiungere un alimento della scena 
+	
+	let f = mtrOggetti.entries();
+	intLastElemId = 0;	
+	for (let x of f) {
+		intLastElemId +=1;
+	}
+
+	//Siccome sto usando un sistema basato su una matrice già esistente non posso più usare i metodi di dei degli aerei javascript 
+	//Allora devo cercare a mano il primo record vuoto , per adesso cerco la prima cella del dell'array sì cè qualcosa là tutta la riga è piena 
+	
+	for (let k = 0; k < intLastElemId-1; k++) {		
+		if ( mtrOggetti[k][0] == '' ) {						
+			return k ; 
+			break;
+		}
+	}	
+	
+}
+</script>
+<!--  ------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<button type="button" onclick="ascascascsacs()" style="position: fixed; right: 0px; bottom: 0px; ">TACCHINO</button> 
+
+<!--  riampiamo il piano di foglietti -->
+
+<script>
+function ascascascsacs() {
+
+//da 300 a 1250	x
+//da -450 a 500	z
+
+
+let strA = '';
+for (let k = 0; k < 20; k++) {
+	for (let j = 0; j < 5; j++) {
+	  strA += '"carta_20240724_'+k+'31' + j + '","' + (300 + j*200) + '","100","' + (-450 + (50 * k)) + '","0","0","0","0","descrizione breve","true","20240724_203116","200","200","#00ff00","#ff0000"' + '\n';
+	} 
+}
+
+document.getElementById('matrice_importa_csv').value = strA;
+
+	
+	fn_matrice_leggi_csv(); //leggi al contenitore all'avvio
+ 
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  ------------------------------------------------------------------------------------------------- -->
+<!--  ------------------------------------------------------------------------------------------------- -->
+<!--  ------------------------------------------------------------------------------------------------- -->
+<!--  ------------------------------------------------------------------------------------------------- -->
+<script>
+//-- TIMESTAMP -------------------------------------------------------------------------------
+function fn_torna_timestamp() {
+
+const currentDate = new Date();
+const month = 
+    (currentDate.getMonth() + 1).toLocaleString('it-IT', 
+        { minimumIntegerDigits: 2, useGrouping: false });
+const day =
+    currentDate.getDate().toLocaleString('it-IT', 
+        { minimumIntegerDigits: 2, useGrouping: false });
+
+const anno = 
+    (currentDate.getFullYear() + 0).toLocaleString('it-IT', 
+        { minimumIntegerDigits: 4, useGrouping: false });
+
+const ore = 
+    (currentDate.getHours() + 0).toLocaleString('it-IT', 
+        { minimumIntegerDigits: 2, useGrouping: false });
+const minuti = 
+    (currentDate.getMinutes() + 0).toLocaleString('it-IT', 
+        { minimumIntegerDigits: 2, useGrouping: false });
+const secondi = 
+    (currentDate.getSeconds() + 0).toLocaleString('it-IT', 
+        { minimumIntegerDigits: 2, useGrouping: false });
+
+  return   anno + month + day + "_" + ore + minuti + secondi;
+  
+}
+</script>
+
+
+</body></html>
